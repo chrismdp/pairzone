@@ -1,15 +1,21 @@
 # Pairzone
 
-This is the gem code for pairzone. There's lots to do:
+This is the gem code for pairzone.
+
+*THIS IS A WORK IN PROGRESS AND WILL NOT WORK AND IS NOT FINISHED!*
+
+There's lots to do:
 
 * Transfer the gem from using a server to using local ec2 keys (via fog?)
 * Convert the cucumber tests to do everything locally
 * Get the chef code into this repo and convert to chef-solo
 * Make the pairzone gem:
+
 ** Request ec2 credentials
 ** Boot up an ec2 instance
 ** Use chef to configure it
 ** Upload your git repo (DONE)
+
 ** Sign in
 
 ## Working on the code
