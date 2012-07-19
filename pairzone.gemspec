@@ -1,17 +1,35 @@
 # -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
-require "pairzone/version"
+lib = File.expand_path('../lib/', __FILE__)
+$:.unshift lib unless $:.include?(lib)
 
-Gem::Specification.new do |gem|
-  gem.name = "pairzone"
-  gem.version = Pairzone::VERSION
-  gem.summary = %Q{The utility gem for the Pairzone service}
-  gem.description = %Q{Pairzone allows you to create an instant, speedy environment for coding alone or with others in the cloud.}
-  gem.email = "dev@edendevelopment.co.uk"
-  gem.homepage = "edendevelopment.co.uk/pairzone"
-  gem.authors = ["Chris Parsons"]
-  gem.files         = `git ls-files`.split("\n")
-  gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  gem.require_paths = ["lib"]
+require 'pairzone/version'
+
+Gem::Specification.new do |s|
+  s.name        = 'pairzone'
+  s.version     = Pairzone::VERSION
+  s.platform    = Gem::Platform::RUBY
+  s.authors     = ["Chris Parsons"]
+  s.email       = ["chrismdp@gmail.com"]
+  s.summary     = "Pair with anyone, on any git repository, right now."
+  s.description = "" # FIXME
+  s.homepage    = "https://github.com/chrismdp/pairzone"
+
+  s.files         = `git ls-files`.split("\n")
+  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.require_paths = ["lib"]
+
+  s.add_dependency 'gli'
+  s.add_dependency 'net-ssh'
+  s.add_dependency 'party_resource'
+  s.add_dependency 'highline'
+
+  s.add_development_dependency 'rspec',    '~> 2.10.0'
+  s.add_development_dependency 'rake',     '~> 0.9.2.2'
+  s.add_development_dependency 'cucumber', '~> 1.2'
+  s.add_development_dependency 'aruba',    '~> 0.4'
+  s.add_development_dependency 'sinatra'
+  s.add_development_dependency 'background_process'
+  s.add_development_dependency 'rack-contrib'
+  s.add_development_dependency 'json'
 end
