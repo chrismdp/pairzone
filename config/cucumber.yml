@@ -1,0 +1,4 @@
+default: --format progress --strict --tags ~@wip features
+wip: --drb --tags @wip:3 --wip features
+autotest: --color --strict --drb --format pretty
+'autotest-all': --color --format progress --strict
