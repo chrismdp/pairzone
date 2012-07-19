@@ -1,9 +1,20 @@
-# Pairzone gem
+# Pairzone
 
-This is the gem code for pairzone
+This is the gem code for pairzone. There's lots to do:
+
+* Transfer the gem from using a server to using local ec2 keys (via fog?)
+* Convert the cucumber tests to do everything locally
+* Get the chef code into this repo and convert to chef-solo
+* Make the pairzone gem:
+** Request ec2 credentials
+** Boot up an ec2 instance
+** Use chef to configure it
+** Upload your git repo (DONE)
+** Sign in
 
 ## Working on the code
 
+We're using github issues and pull requests. Usual score.
 
 ### Getting set up
 
@@ -22,3 +33,4 @@ ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAvoEkswUJgBnwv0fH1LO4BXnN1zwC6ARLWvWmH7rhmRz0
 </pre>
 
 On OSX you will also need to add the user account to the Sharing preference pane to allow them to log in
+
