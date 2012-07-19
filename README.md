@@ -16,6 +16,8 @@ This is the gem code for pairzone. There's lots to do:
 
 We're using github issues and pull requests. Usual score.
 
+We hang out in #pairzone on Freenode.
+
 ### Getting set up
 
 In order to run the features you need a user account on your machine called pairzone-auth with the following in _~/.ssh/authorized_keys:_
