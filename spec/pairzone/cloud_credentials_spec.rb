@@ -32,6 +32,7 @@ describe Pairzone::CloudCredentials do
       credentials_source.stub(:secret_access_key => "abcdef")
       File.stub(:open)
     end
+
     it "asks the session for them" do
       credentials_source.should_receive(:access_key) { "foobar" }
       credentials_source.should_receive(:secret_access_key) { "bazquux" }

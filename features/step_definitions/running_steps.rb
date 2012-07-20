@@ -8,10 +8,6 @@ When /^"([^"]*)" runs? "([^"]*)" in test mode$/ do |developer_name, command|
   pairzone_command(command, developer_name)
 end
 
-When /^"([^"]*)" runs "([^"]*)" in test mode with no api key$/ do |developer_name, command|
-  pairzone_command(command, developer_name, true)
-end
-
 Given /^"([^"]*)" has already started a pairzone with "([^"]*)" as a collaborator$/ do |developer_name, collaborator_name|
   create_local_git_repository
   pairzone_command("pairzone start --background -c #{collaborator_name}", developer_name)

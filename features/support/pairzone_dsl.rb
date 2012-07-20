@@ -1,9 +1,13 @@
 module PairzoneDSL
   def create_local_git_repository
     run "git init"
-    run "echo foo >foo"
-    run "git add ."
-    run "git commit -m 'Initial commit'"
+    run "echo 'foo' >foo"
+    run "git commit -am 'Initial commit'"
+  end
+
+  def create_ec2_credentials
+    run "mkdir -p #{config_directory}"
+    run "cp ../../test/fixtures/cloud_credentials.yml #{config_directory}/"
   end
 
   def look_for(text)
