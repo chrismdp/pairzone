@@ -15,7 +15,7 @@ module Pairzone
     private
 
     def read_config
-      config = YAML.load(File.read(cloud_credentials_file, "r"))
+      config = YAML.load(File.read(cloud_credentials_file))
       @access_key = config['ec2']['access_key']
       @secret_access_key = config['ec2']['secret_access_key']
     end

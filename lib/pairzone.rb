@@ -2,6 +2,7 @@ require 'pairzone/version'
 require 'pairzone/shell'
 require 'pairzone/logger'
 
+require 'pairzone/asker'
 require 'pairzone/curator'
 require 'pairzone/instance'
 require 'pairzone/cloud_credentials'
