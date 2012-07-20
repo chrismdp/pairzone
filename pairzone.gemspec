@@ -27,8 +27,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rake',     '~> 0.9.2.2'
   s.add_development_dependency 'cucumber', '~> 1.2'
   s.add_development_dependency 'aruba',    '~> 0.4'
-  s.add_development_dependency 'sinatra'
-  s.add_development_dependency 'background_process'
-  s.add_development_dependency 'rack-contrib'
-  s.add_development_dependency 'json'
 end
