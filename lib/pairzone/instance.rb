@@ -1,5 +1,5 @@
 module Pairzone
-  class Pairzone
+  class Instance
     include PairzoneConnection
     extend PairzoneLifecycle
 
