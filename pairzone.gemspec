@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.name        = 'pairzone'
   s.version     = Pairzone::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Chris Parsons"]
+  s.authors     = ["Chris Parsons", "Richard Patching"]
   s.email       = ["chrismdp@gmail.com"]
   s.summary     = "Pair with anyone, on any git repository, right now."
   s.description = "" # FIXME

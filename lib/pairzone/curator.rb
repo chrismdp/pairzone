@@ -3,7 +3,7 @@ module Pairzone
     attr_accessor :start_wait_interval
     DEFAULT_START_WAIT_INTERVAL = 5
 
-    def self.start(options)
+    def start(options)
       Logger.info("Starting Pairzone for project '#{options[:project_name]}'...")
       pairzone = Pairzone.create(:project_name => options[:project_name], :collaborators => options[:collaborators])
       report_starting_status(pairzone)
@@ -11,14 +11,14 @@ module Pairzone
       wait_for(pairzone)
     end
 
-    def self.report_starting_status(pairzone)
+    def report_starting_status(pairzone)
       Logger.info("Pairzone '#{pairzone.name}' started.")
       pairzone.collaborators.each do |collaborator|
         Logger.info("Collaborator '#{collaborator}' added.")
       end
     end
 
-    def self.wait_for(pairzone)
+    def wait_for(pairzone)
       while pairzone.status != 'started' do
         Logger.info("Waiting for pairzone to boot...")
         sleep start_wait_interval || DEFAULT_START_WAIT_INTERVAL
