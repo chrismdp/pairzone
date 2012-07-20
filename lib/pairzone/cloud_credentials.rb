@@ -1,16 +1,38 @@
 module Pairzone
-  class CloudCredentials < Struct.new(:config_directory)
+  class CloudCredentials < Struct.new(:config_directory, :credentials_source)
     attr :access_key, :secret_access_key
 
     def initialize(*args)
       super(*args)
-      read_config
+      if File.exists?(cloud_credentials_file)
+        read_config
+      else
+        ask_for_config
+        save_config
+      end
     end
 
+    private
+
     def read_config
-      config = YAML.load(File.read(config_directory, "r"))
+      config = YAML.load(File.read(cloud_credentials_file, "r"))
       @access_key = config['ec2']['access_key']
       @secret_access_key = config['ec2']['secret_access_key']
+    end
+
+    def ask_for_config
+      @access_key = credentials_source.access_key
+      @secret_access_key = credentials_source.secret_access_key
+    end
+
+    def save_config
+      File.open(cloud_credentials_file, "w") do |file|
+        file.write(YAML.dump({ 'ec2' => { 'access_key' => @access_key, 'secret_access_key' => @secret_access_key }}))
+      end
+    end
+
+    def cloud_credentials_file
+      config_directory + "/cloud_credentials.yml"
     end
   end
 end
