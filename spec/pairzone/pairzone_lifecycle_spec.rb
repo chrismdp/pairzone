@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe Pairzone::PairzoneLifecycle do
-  subject { stub(:lifecycle, create: unstarted, find_by_project_name: started).extend(Pairzone::PairzoneLifecycle) }
   let(:unstarted) { mock(:pairzone, name: 'pairzone', collaborators: [], ip: '', status: 'unstarted') }
   let(:started) { mock(:pairzone, name: 'pairzone', collaborators: [], ip: '', status: 'started') }
+  subject { stub(:lifecycle, create: unstarted, find_by_project_name: started).extend(Pairzone::PairzoneLifecycle) }
 
   before do
     subject.start_wait_interval = 0
