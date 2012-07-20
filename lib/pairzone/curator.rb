@@ -1,3 +1,5 @@
+require 'fog'
+
 module Pairzone
   class Curator
     attr_accessor :start_wait_interval
