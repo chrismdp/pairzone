@@ -1,5 +1,5 @@
 def look_for(text)
-  Then %{the output should contain "#{text}"}
+  assert_partial_output "#{text}"
 end
 
 def check_attempt_connect
@@ -10,10 +10,14 @@ def check_didnt_connect
   Then %{the output should not contain "pairzone-tmux"} # We cannot run the session, but if this shows up we tried to
 end
 
-Then /^a new pairzone is started for "([^"]*)"$/ do |developer_name|
+def check_pairzone_started_for(developer_name)
   look_for "Starting Pairzone for project 'aruba'..."
   look_for "Pairzone '#{developer_name}-aruba' started."
   look_for "Pairzone booted: ip address 127.0.0.1"
+end
+
+Then /^a new pairzone is started for "([^"]*)"$/ do |developer_name|
+  check_pairzone_started_for(developer_name)
 end
 
 Then /^no pairzone should be started$/ do
@@ -21,7 +25,7 @@ Then /^no pairzone should be started$/ do
 end
 
 Then /^a new pairzone is started for "([^"]*)" in the background$/ do |developer_name|
-  Then %{a new pairzone is started for "#{developer_name}"}
+  check_pairzone_started_for(developer_name)
   check_didnt_connect
 end
 
