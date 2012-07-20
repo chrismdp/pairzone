@@ -11,7 +11,7 @@ module Pairzone
       end
 
       def execute
-        @pairzone = Pairzone::Api::Pairzone.start(:project_name => @project_name, :collaborators => collaborators)
+        @pairzone = Pairzone::Pairzone.start(:project_name => @project_name, :collaborators => collaborators)
         @pairzone.push_code(@identity)
         unless @options[:background]
           @pairzone.connect(@identity)

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Pairzone::Api::PairzoneLifecycle do
-  subject { stub(:lifecycle, create: unstarted, find_by_project_name: started).extend(Pairzone::Api::PairzoneLifecycle) }
+describe Pairzone::PairzoneLifecycle do
+  subject { stub(:lifecycle, create: unstarted, find_by_project_name: started).extend(Pairzone::PairzoneLifecycle) }
   let(:unstarted) { mock(:pairzone, name: 'pairzone', collaborators: [], ip: '', status: 'unstarted') }
   let(:started) { mock(:pairzone, name: 'pairzone', collaborators: [], ip: '', status: 'started') }
 

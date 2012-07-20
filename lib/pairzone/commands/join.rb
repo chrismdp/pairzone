@@ -9,7 +9,7 @@ module Pairzone
       end
 
       def execute
-        pairzone = Pairzone::Api::Pairzone.find_by_project_name(@pairzone_name)
+        pairzone = Pairzone::Pairzone.find_by_project_name(@pairzone_name)
         if (pairzone.nil?)
           Logger.error("No pairzone exists with the name '#{@pairzone_name}'.")
         else

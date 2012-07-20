@@ -2,9 +2,9 @@ require 'pairzone/version'
 require 'pairzone/shell'
 require 'pairzone/logger'
 
-require 'pairzone/api/pairzone_lifecycle'
-require 'pairzone/api/pairzone_connection'
-require 'pairzone/api/pairzone'
+require 'pairzone/pairzone_lifecycle'
+require 'pairzone/pairzone_connection'
+require 'pairzone/pairzone'
 
 require 'pairzone/commands/info'
 require 'pairzone/commands/start'
