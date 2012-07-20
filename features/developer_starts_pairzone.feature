@@ -1,4 +1,4 @@
-@api_server @announce
+@announce
 Feature: Developer starts pairzone
 
   Scenario:
@@ -19,17 +19,3 @@ Feature: Developer starts pairzone
     When "bob" runs "pairzone start --background" in test mode
     And "bob" runs "pairzone start" in test mode
     Then "bob" should be connected to "bob-aruba"
-
-  Scenario: Developer adds collaborator
-    Given I have a local git repository
-    When "bob" runs "pairzone start -c derek" in test mode
-    Then "derek" is added as a collaborator on my new pairzone
-    When "bob" runs "pairzone start -c derek,jim" in test mode
-    Then "derek" is added as a collaborator on my new pairzone
-    And "jim" is added as a collaborator on my new pairzone
-
-  Scenario: Developer adds non-existent collaborator
-    Given I have a local git repository
-    When "bob" runs "pairzone start -c derek,invalid_collaborator" in test mode
-    Then "derek" is added as a collaborator on my new pairzone
-    And "invalid_collaborator" is not added as a collaborator on my new pairzone

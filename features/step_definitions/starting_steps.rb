@@ -2,6 +2,14 @@ def look_for(text)
   Then %{the output should contain "#{text}"}
 end
 
+def check_attempt_connect
+  look_for "/usr/local/bin/pairzone-tmux.sh: No such file or directory" # We cannot run the session, but this will show we tried to
+end
+
+def check_didnt_connect
+  Then %{the output should not contain "pairzone-tmux"} # We cannot run the session, but if this shows up we tried to
+end
+
 Then /^a new pairzone is started for "([^"]*)"$/ do |developer_name|
   look_for "Starting Pairzone for project 'aruba'..."
   look_for "Pairzone '#{developer_name}-aruba' started."
@@ -14,7 +22,7 @@ end
 
 Then /^a new pairzone is started for "([^"]*)" in the background$/ do |developer_name|
   Then %{a new pairzone is started for "#{developer_name}"}
-  And %{the output should not contain "pairzone-tmux"} # We cannot run the session, but if this shows up we tried to
+  check_didnt_connect
 end
 
 Then /^the code in my current directory is pushed to the server$/ do
@@ -23,7 +31,7 @@ Then /^the code in my current directory is pushed to the server$/ do
 end
 
 Then /^an SSH connection is made to my new pairzone$/ do
-  look_for "/usr/local/bin/pairzone-tmux.sh: No such file or directory" # We cannot run the session, but this will show we tried to
+  check_attempt_connect
 end
 
 Then /^the code is downloaded to a "([^"]*)" branch when I quit the session$/ do |branch_name|
@@ -39,7 +47,7 @@ Then /^"([^"]*)" is not added as a collaborator on my new pairzone$/ do |collabo
 end
 
 Then /^"([^"]*)" should be connected to "([^"]*)"$/ do |arg1, arg2|
-  look_for "/usr/local/bin/pairzone-tmux.sh: No such file or directory" # We cannot run the session, but this will show we tried to
+  check_attempt_connect
 end
 
 Then /^"([^"]*)" should not be able to connect$/ do |collaborator_name|
