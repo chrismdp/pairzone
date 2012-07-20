@@ -3,26 +3,15 @@ require 'tempfile'
 
 module Pairzone
   module Commands
-    class Start
-      def initialize(project_name, identity, options)
-        @project_name = project_name
-        @identity = File.expand_path(identity)
-        @options = options
-      end
-
+    class Start < Struct.new(:project_name, :cloud_credentials, :identity)
       def execute
-        @pairzone = Pairzone::Instance.start(:project_name => @project_name, :collaborators => collaborators)
-        @pairzone.push_code(@identity)
-        unless @options[:background]
-          @pairzone.connect(@identity)
-          @pairzone.fetch_code(@identity)
+        curator = Pairzone::Curator.new(project_name, cloud_credentials, identity)
+        pairzone = curator.start(:project_name => project_name)
+        pairzone.push_code
+        unless options[:background]
+          pairzone.connect
+          pairzone.fetch_code
         end
-      end
-
-      private
-
-      def collaborators
-        return (@options[:c] || "").split(',')
       end
     end
   end

@@ -1,6 +1,6 @@
 def pairzone_command(command, identity = 'bob', interactive = false)
   pairzone, *args = command.split
-  cmd = "#{pairzone} --debug --config=#{config_directory} --identity=../../features/keys/#{identity}.key #{args.join(' ')}"
+  cmd = "#{pairzone} --debug --config=#{config_directory} #{args.join(' ')}"
   interactive ? run_interactive(cmd) : run(cmd)
 end
 

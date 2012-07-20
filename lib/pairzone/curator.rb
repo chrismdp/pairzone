@@ -1,13 +1,12 @@
 require 'fog'
 
 module Pairzone
-  class Curator
+  class Curator < Struct.new(:cloud_credentials, :identity)
     attr_accessor :start_wait_interval
     DEFAULT_START_WAIT_INTERVAL = 5
 
     def start(options)
       Logger.info("Starting Pairzone for project '#{options[:project_name]}'...")
-      pairzone = Pairzone.create(:project_name => options[:project_name], :collaborators => options[:collaborators])
       report_starting_status(pairzone)
 
       wait_for(pairzone)

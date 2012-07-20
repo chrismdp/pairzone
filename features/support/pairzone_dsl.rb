@@ -11,11 +11,13 @@ module PairzoneDSL
   end
 
   def check_attempt_connect
-    look_for "/usr/local/bin/pairzone-tmux.sh: No such file or directory" # We cannot run the session, but this will show we tried to
+    # We cannot run the session, but if this shows up we tried to
+    look_for "/usr/local/bin/pairzone-tmux.sh: No such file or directory"
   end
 
   def check_didnt_connect
-    Then %{the output should not contain "pairzone-tmux"} # We cannot run the session, but if this shows up we tried to
+    # We cannot run the session, but if this shows up we tried to
+    assert_no_partial_output %{the output should not contain "pairzone-tmux"}
   end
 
   def check_pairzone_started_for(developer_name)
