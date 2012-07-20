@@ -16,10 +16,6 @@ config_file '.pairzone/config'
 desc 'Show debug output'
 switch [:d, :debug]
 
-desc 'Specifies the pairzone web service to connect to'
-arg_name 'host'
-flag [:s, :server]
-
 desc 'Specifies the pairzone config directory'
 arg_name 'directory'
 default_value "#{Dir.home}/.pairzone"
@@ -39,16 +35,10 @@ def local_project_name
   File.basename(Dir.pwd)
 end
 
-def connect_with(globals)
-  key = Pairzone::Authenticate.retrieve_key(globals[:config], globals[:s])
-  Pairzone::Api::Base.connect_to(globals[:s], username: key, password: 'x', default: true)
-end
-
 desc 'Display Pairzone info'
 long_desc 'Display information about the Pairzone for the current directory.'
 command [:info] do |c|
   c.action do |globals, options, args|
-    connect_with globals
     Pairzone::Commands::Info.new(local_project_name).execute
   end
 end
@@ -63,7 +53,6 @@ command [:start] do |c|
   c.desc 'Do not connect to this pairzone, but leave it running in the background.'
   c.switch [:b, :background]
   c.action do |globals, options, args|
-    connect_with globals
     Pairzone::Commands::Start.new(local_project_name, globals[:i], options).execute
   end
 end
@@ -72,7 +61,6 @@ desc 'Join an existing pairzone'
 long_desc 'Allows an owner or collaborator to join a running pairzone instance.'
 command [:join] do |c|
   c.action do |globals, options, args|
-    connect_with globals
     name = args[0]
     identity = globals[:i]
     Pairzone::Commands::Join.new(name, identity).execute
