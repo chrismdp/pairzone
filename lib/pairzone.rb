@@ -4,7 +4,7 @@ require 'pairzone/logger'
 
 require 'pairzone/pairzone_lifecycle'
 require 'pairzone/pairzone_connection'
-require 'pairzone/pairzone'
+require 'pairzone/instance'
 
 require 'pairzone/commands/info'
 require 'pairzone/commands/start'
