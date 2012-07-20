@@ -1,8 +1,9 @@
 module PairzoneDSL
   def create_local_git_repository
     run "git init"
-    run "echo 'foo' >foo"
-    run "git commit -am 'Initial commit'"
+    run "touch foo"
+    run "git add foo"
+    run "git commit -m 'Initial commit'"
   end
 
   def create_ec2_credentials
