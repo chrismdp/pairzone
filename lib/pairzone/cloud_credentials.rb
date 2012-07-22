@@ -21,8 +21,9 @@ module Pairzone
     end
 
     def ask_for_config
-      @access_key = credentials_source.access_key
-      @secret_access_key = credentials_source.secret_access_key
+      keys = credentials_source.ec2_keys
+      @access_key = keys[:access_key]
+      @secret_access_key = keys[:secret_access_key]
     end
 
     def save_config

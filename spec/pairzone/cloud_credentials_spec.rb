@@ -28,14 +28,12 @@ describe Pairzone::CloudCredentials do
   context "not already found" do
     before do
       File.stub(:exists? => false)
-      credentials_source.stub(:access_key => "12a3456")
-      credentials_source.stub(:secret_access_key => "abcdef")
+      credentials_source.stub(:ec2_keys) {{ :access_key => "12a3456", :secret_access_key => "abcdef" }}
       File.stub(:open)
     end
 
     it "asks the session for them" do
-      credentials_source.should_receive(:access_key) { "foobar" }
-      credentials_source.should_receive(:secret_access_key) { "bazquux" }
+      credentials_source.should_receive(:ec2_keys) {{ :access_key => "foobar", :secret_access_key => "bazquux" }}
       subject.access_key.should == "foobar"
       subject.secret_access_key.should == "bazquux"
     end
