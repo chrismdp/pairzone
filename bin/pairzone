@@ -44,7 +44,7 @@ command [:start] do |c|
   c.action do |globals, options, args|
     cloud_credentials = Pairzone::CloudCredentials.new(globals[:config], Pairzone::Asker.new)
     identity = Pairzone::Identity.new(options[:config])
-    #Pairzone::Commands::Start.new(local_project_name, cloud_credentials, identity).execute
+    Pairzone::Commands::Start.new(local_project_name, cloud_credentials, identity).execute
   end
 end
 
