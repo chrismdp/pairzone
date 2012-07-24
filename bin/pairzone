@@ -2,11 +2,9 @@
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 
 require 'rubygems'
-
 require 'bundler/setup'
 
 require 'pairzone'
-
 require 'gli'
 
 include GLI
@@ -20,11 +18,6 @@ desc 'Specifies the pairzone config directory'
 arg_name 'directory'
 default_value "#{Dir.home}/.pairzone"
 flag [:config]
-
-desc 'Specifies the private key to use as your identity'
-arg_name 'private key'
-default_value "~/.ssh/id_rsa"
-flag [:i, :identity]
 
 pre do |globals, command, options, args|
   Pairzone::Logger.configure_from(globals)
@@ -46,14 +39,12 @@ end
 desc 'Start a new Pairzone'
 long_desc 'Start a new Pairzone for the current directory, or reconnect to a running one.'
 command [:start] do |c|
-  c.desc 'Specify a comma seperated list of collaborators to add to this pairzone.'
-  c.arg_name 'collaborators'
-  c.flag [:c]
-
   c.desc 'Do not connect to this pairzone, but leave it running in the background.'
   c.switch [:b, :background]
   c.action do |globals, options, args|
-    Pairzone::Commands::Start.new(local_project_name, globals[:i], options).execute
+    cloud_credentials = Pairzone::CloudCredentials.new(globals[:config], Pairzone::Asker.new)
+    identity = Pairzone::Identity.new(options[:config])
+    Pairzone::Commands::Start.new(local_project_name, cloud_credentials, identity).execute
   end
 end
 

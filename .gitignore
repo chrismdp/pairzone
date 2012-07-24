@@ -20,6 +20,7 @@ doc
 .yardoc
 pkg
 .bundle
+tags
 
 ## PROJECT::SPECIFIC
 tmp/aruba*

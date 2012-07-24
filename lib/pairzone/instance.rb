@@ -1,5 +1,5 @@
 module Pairzone
-  class Instance
+  class Instance < Struct.new(:name, :status)
     def to_str
       "<%= color('This Pairzone: #{name}', CYAN + BOLD) %>\nOwner:         #{owner}\nCollaborators: #{collaborators.join(', ')}"
     end

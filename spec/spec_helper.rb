@@ -5,3 +5,12 @@ require 'rubygems'
 require 'bundler/setup'
 require 'pairzone'
 require 'rspec'
+require 'fog'
+
+Fog.mock!
+
+class String
+  def undent
+    gsub /^.{#{slice(/^ +/).length}}/, ''
+  end
+end

@@ -24,10 +24,6 @@ module Pairzone
       def error(msg)
         stdout.say("<%= color('Pairzone error:', RED + BOLD) %> #{msg}")
       end
-
-      def ask(msg, &block)
-        stdout.ask(msg, &block)
-      end
     end
   end
 end

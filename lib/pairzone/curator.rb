@@ -1,30 +1,22 @@
+require 'fog'
+
 module Pairzone
-  class Curator
-    attr_accessor :start_wait_interval
-    DEFAULT_START_WAIT_INTERVAL = 5
-
-    def start(options)
-      Logger.info("Starting Pairzone for project '#{options[:project_name]}'...")
-      pairzone = Pairzone.create(:project_name => options[:project_name], :collaborators => options[:collaborators])
-      report_starting_status(pairzone)
-
-      wait_for(pairzone)
+  class Curator < Struct.new(:project_name, :cloud_credentials, :identity)
+    def start
+      server = connection.servers.bootstrap(
+        :private_key_path => identity.private_key_path,
+        :public_key_path => identity.public_key_path,
+        :username => 'ubuntu'
+      )
     end
 
-    def report_starting_status(pairzone)
-      Logger.info("Pairzone '#{pairzone.name}' started.")
-      pairzone.collaborators.each do |collaborator|
-        Logger.info("Collaborator '#{collaborator}' added.")
-      end
-    end
-
-    def wait_for(pairzone)
-      while pairzone.status != 'started' do
-        Logger.info("Waiting for pairzone to boot...")
-        sleep start_wait_interval || DEFAULT_START_WAIT_INTERVAL
-      end
-      Logger.info("Pairzone booted: ip address #{pairzone.ip}")
-      pairzone
+    private
+    def connection
+      @connection ||= Fog::Compute.new(
+        :provider => 'AWS',
+        :aws_access_key_id => cloud_credentials.access_key,
+        :aws_secret_access_key => cloud_credentials.secret_access_key
+      )
     end
   end
 end
