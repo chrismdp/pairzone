@@ -11,4 +11,9 @@ RSpec::Core::RakeTask.new(:rcov) do |spec|
   spec.rcov_opts =  %q[--exclude "spec"]
 end
 
-task :default => :spec
+task :default => [:spec, :cucumber]
+
+desc "Cukes"
+task :cucumber do
+  sh "cucumber"
+end
